@@ -189,7 +189,7 @@
         }
     };
 
-    var seletedTheme = "black";
+    var seletedTheme = "purple";
 
     $('body').addClass(seletedTheme);
     var barColor = Themes[seletedTheme].barColor;
