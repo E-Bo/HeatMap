@@ -16,7 +16,6 @@
     [
         'echarts',
         'echarts/chart/map',
-        // 'echarts/chart/bar',
         'echarts/chart/line',
         'echarts/chart/pie'
     ],
@@ -28,15 +27,52 @@
     var BarLabelColor = 'rgba(255,255,255,0.7)';
     var BarLineColor = 'rgba(255,255,255,0.9)';
 
+    var page = function(){
+        this.navItems = $(".nav-item");
+        this.tabItems = $(".tab-item");
+        this.tabName = $(".js-main-title");
+        if(this.navItems.map(function(){if($(this).hasClass('active')){return $(this)}}).length > 0){
+            this.activeNavItem = this.navItems.map(function(){if($(this).hasClass('active')){return $(this)}});
+        }else{
+            this.activeNavItem = $(this.navItems[0]);
+            this.activeNavItem.addClass('active');
+        }
+        this.tabName.find('span').text(this.activeNavItem.attr('data-tab-name'));
+        if(this.tabItems.map(function(){if($(this).hasClass('active')){return $(this)}}).length > 0){
+            this.activeTabItem = this.tabItems.map(function(){if($(this).hasClass('active')){return $(this)}});
+        }else{
+            this.activeTabItem = $(this.tabItems[0]);
+            this.activeTabItem.addClass('active');
+        }
+        this.navItems.on('click',{page: this},this.clickNavItem);
+    }
+
+    page.prototype = {
+        clickNavItem : function(e){
+            e.data.page.activeNavItem.removeClass('active');
+            e.data.page.activeTabItem.removeClass('active');
+            e.data.page.activeNavItem = $(this);
+            e.data.page.activeTabItem = e.data.page.tabItems.map(function(){
+                if(this.id == e.data.page.activeNavItem.attr('data-control')){
+                    return $(this);
+                }
+            });
+            e.data.page.tabName.find("span").text(e.data.page.activeNavItem.attr('data-tab-name'));
+            e.data.page.activeNavItem.addClass('active');
+            e.data.page.activeTabItem.addClass('active');
+        }
+    }
+
+    function init(){
+        var app = new page();
+    }
+
     function drawCharts(ec){
+        init();
         drawMap(ec);
-        // drawBarBottom(ec);
-        // drawBarTop(ec);
         drawPieTop(ec);
         drawPieBottom(ec);
-        drawArea(ec);
     };
-
 
     var Themes = {
         blue:{
@@ -141,8 +177,6 @@
                 'rgba(255, 255, 255, 1)',
                 'rgba(14, 241, 242, 1)'
             ],
-            // mapBorderColor: 'rgba(126,85,248,1)',
-            // mapBGColor: 'rgba(126,85,248,0.05)',
             mapBorderColor: 'rgba(70,242,183,1)',
             mapBGColor: 'rgba(70,242,183,0.05)',
             circleColor:{
@@ -334,501 +368,6 @@
         };
 
         ezPieBottom.setOption(pieBottomOption);
-    };
-
-    function drawBarTop(ec){
-        var ezPieTop = ec.init(document.getElementById('pieChartTop'));
-        pieTopOption = {
-            backgroundColor: 'rgba(0,0,0,0)',
-            color: [
-                barColor.topBarColor
-            ],
-            title : {
-                text: '',
-                subtext: ''
-            },
-            tooltip : {
-                trigger: 'item',
-                formatter: "{b} : {c}"
-            },
-            legend: {
-                show: false,
-                data:['浙江','广东','北京','上海','湖北']
-            },
-            toolbox: {
-                show : false,
-                feature : {
-                    mark : {show: true},
-                    dataView : {show: true, readOnly: false},
-                    magicType : {
-                        show: true, 
-                        type: ['pie']
-                    },
-                    restore : {show: true},
-                    saveAsImage : {show: true}
-                }
-            },
-            grid:{
-                x: 90,
-                y: 20,
-                x2: 50,
-                y2: 30,
-                borderWidth:0
-            },
-            xAxis : [
-                {   
-                    type: 'value',
-                    splitLine: {show: false},
-                    boundaryGap: [0, 0.01],
-                    position: 'top',
-                    axisLine: {
-                        show: true,
-                        lineStyle: {
-                            color: barColor.axisColor,
-                            width: 1
-                        }
-                    },
-                    axisLabel: {
-                        show: true,
-                        margin: 4,
-                        textStyle: {
-                            color: barColor.labelColor,
-                            align: 'center'
-                        },
-                        formatter: function(value){
-                            return value/1000 + 'k';
-                        }
-                    },
-                    axisTick:{
-                        show: true,
-                        inside: true,
-                        length: 2,
-                        lineStyle:{
-                            color:barColor.labelColor
-                        }
-                    }
-                }
-            ],
-            yAxis : [
-                {
-                    type : 'category',
-                    splitLine: {show: false},
-                    axisLine: {show: false},
-                    axisLabel: {
-                        textStyle:{
-                            color: barColor.axisColor,
-                            fontSize: 15
-                        }
-                    },
-                    axisTick:{
-                        show: false
-                    },
-                    data:['湖北','上海','北京','广东','浙江']
-                }
-            ],
-            calculable : true,
-            series : [
-                {
-                    name:'交易访问量',
-                    type:'bar',
-                    stack: 'sum',
-                    barWidth: 18,
-                    itemStyle:{
-                        normal:{
-                            label:{
-                                show: true,
-                                position:'insideLeft',
-                                // formatter: "{c}%",
-                                formatter: function(item){
-                                    return item.data.percent;
-                                },
-                                textStyle: {
-                                    fontSize: 14,
-                                    // color:'#1b1b1b'
-                                    color: '#fff'
-                                }
-                            }
-                        },
-                        emphasis:{
-                            label:{
-                                show: true,
-                                position:'insideLeft',
-                                // formatter: "{c}%",
-                                formatter: function(item){
-                                    return item.data.percent;
-                                },
-                                textStyle: {
-                                    fontSize: 14,
-                                    color: '#fff'
-                                }
-                            }
-                        }
-                    },
-                    data:[
-                        {value:413621, name:'湖北' ,percent:"8%"},
-                        {value:503130, name:'上海', percent:"10%"},
-                        {value:584525, name:'北京', percent:"13%"},
-                        {value:623231, name:'广东', percent:"15%"},
-                        {value:694912, name:'浙江', percent:"17%"}
-                    ]
-                },
-                {
-                    name:'交易访问量',
-                    type:'bar',
-                    stack: 'sum',
-                    barWidth: 18,
-                    itemStyle:{
-                        normal:{
-                            color: "rgba(255,255,255,0)",
-                            barBorderWidth: 2,
-                            barBorderColor: barColor.topBarColor,
-                            label:{
-                                show: true,
-                                position:'right',
-                                // formatter: "{c}%",
-                                formatter: function(item){
-                                    return item.data.formatValue;
-                                },
-                                textStyle: {
-                                    fontSize: 14,
-                                    // color:'#1b1b1b'
-                                    color: '#fff'
-                                }
-                            }
-                        },
-                        emphasis:{
-                            color: "rgba(255,255,255,0)",
-                            label:{
-                                show: true,
-                                position:'right',
-                                // formatter: "{c}%",
-                                formatter: function(item){
-                                    return item.data.percent;
-                                },
-                                textStyle: {
-                                    fontSize: 14,
-                                    color: '#fff'
-                                }
-                            }
-                        }
-                    },
-                    data:[
-                        {value:463621, name:'湖北' ,formatValue:"876K"},
-                        {value:703130, name:'上海', formatValue:"1.2M"},
-                        {value:884525, name:'北京', formatValue:"1.5M"},
-                        {value:1123231, name:'广东', formatValue:"1.8M"},
-                        {value:1194912, name:'浙江', formatValue:"1.9M"}
-                    ]
-                }
-            ]
-        };
-        ezPieTop.setOption(pieTopOption);
-    };
-
-    function drawBarBottom(ec){
-        var ezPieBottom = ec.init(document.getElementById('pieChartBottom'));
-        pieBottomOption = {
-            backgroundColor: 'rgba(0,0,0,0)',
-            color: [
-                barColor.bottomBarColor
-            ],
-            title : {
-                text: '',
-                subtext: ''
-            },
-            tooltip : {
-                trigger: 'item',
-                formatter: "{b} : {c}"
-            },
-            legend: {
-                show: false,
-                data:['网银大众版','手机银行','网上支付','网银专业版','一网通主站']
-            },
-            toolbox: {
-                show : false,
-                feature : {
-                    mark : {show: true},
-                    dataView : {show: true, readOnly: false},
-                    magicType : {
-                        show: true, 
-                        type: ['pie']
-                    },
-                    restore : {show: true},
-                    saveAsImage : {show: true}
-                }
-            },
-            grid:{
-                x: 90,
-                y: 20,
-                x2: 50,
-                y2: 30,
-                borderWidth:0
-            },
-            xAxis : [
-                {   
-                    type: 'value',
-                    splitLine: {show: false},
-                    boundaryGap: [0, 0.01],
-                    position: 'top',
-                    axisLine: {
-                        show: true,
-                        lineStyle: {
-                            color: barColor.axisColor,
-                            width: 1
-                        }
-                    },
-                    axisLabel: {
-                        show: true,
-                        margin: 4,
-                        textStyle: {
-                            color: barColor.labelColor,
-                            align: 'center'
-                        },
-                        formatter: function(value){
-                            return value/1000 + 'k';
-                        }
-                    },
-                    axisTick:{
-                        show: true,
-                        inside: true,
-                        length: 2,
-                        lineStyle:{
-                            color:barColor.labelColor
-                        }
-                    }
-                }
-            ],
-            yAxis : [
-                {
-                    type : 'category',
-                    splitLine: {show: false},
-                    axisLine: {show: false},
-                    axisLabel: {
-                        textStyle:{
-                            color: barColor.axisColor,
-                            fontSize: 15
-                        }
-                    },
-                    axisTick:{
-                        show: false
-                    },
-                    data:['网银专业版','网上支付','手机银行','一网通主站','网银大众版']
-                }
-            ],
-            calculable : true,
-            series : [
-                {
-                    name:'交易访问量',
-                    type:'bar',
-                    stack: 'sum',
-                    barWidth: 18,
-                    itemStyle:{
-                        normal:{
-                            label:{
-                                show: true,
-                                position:'insideLeft',
-                                // formatter: "{c}%",
-                                formatter: function(item){
-                                    return item.data.percent;
-                                },
-                                textStyle: {
-                                    fontSize: 14,
-                                    // color:'#1b1b1b'
-                                    color: '#fff'
-                                }
-                            }
-                        },
-                        emphasis:{
-                            label:{
-                                show: true,
-                                position:'insideLeft',
-                                // formatter: "{c}%",
-                                formatter: function(item){
-                                    return item.data.percent;
-                                },
-                                textStyle: {
-                                    fontSize: 14,
-                                    color: '#fff'
-                                }
-                            }
-                        }
-                    },
-                    data:[
-                        {value:513000, name:'网银专业版', percent:"6%"},
-                        {value:1023100, name:'网上支付', percent:"11%"},
-                        {value:1132200, name:'手机银行', percent:"12%"},
-                        {value:1532200, name:'一网通主站',percent:"15%"},
-                        {value:2491200, name:'网银大众版', percent:"25%"}
-                    ]
-                },
-                {
-                    name:'交易访问量',
-                    type:'bar',
-                    stack: 'sum',
-                    barWidth: 18,
-                    itemStyle:{
-                        normal:{
-                            color: "rgba(255,255,255,0)",
-                            barBorderWidth: 2,
-                            barBorderColor: barColor.bottomBarColor,
-                            label:{
-                                show: true,
-                                position:'right',
-                                // formatter: "{c}%",
-                                formatter: function(item){
-                                    return item.data.formatValue;
-                                },
-                                textStyle: {
-                                    fontSize: 14,
-                                    // color:'#1b1b1b'
-                                    color: '#fff'
-                                }
-                            }
-                        },
-                        emphasis:{
-                            color: "rgba(255,255,255,0)",
-                            label:{
-                                show: true,
-                                position:'right',
-                                // formatter: "{c}%",
-                                formatter: function(item){
-                                    return item.data.percent;
-                                },
-                                textStyle: {
-                                    fontSize: 14,
-                                    color: '#fff'
-                                }
-                            }
-                        }
-                    },
-                    data:[
-                        {value:613000, name:'网银专业版', formatValue:"1.1M"},
-                        {value:1123100, name:'网上支付', formatValue:"2.1M"},
-                        {value:1332200, name:'手机银行', formatValue:"2.3M"},
-                        {value:1532200, name:'一网通主站',formatValue:"3M"},
-                        {value:2591200, name:'网银大众版', formatValue:"5M"}
-                    ]
-                }
-            ]
-        };
-
-        ezPieBottom.setOption(pieBottomOption);
-    };
-
-    function drawArea(ec){
-        var ezAreaChart = ec.init(document.getElementById('areaChart'));
-        areaOption = {
-            backgroundColor: 'rgba(0,0,0,0)',
-            color: [areaColor.lineColor],
-            title : {
-                text: '',
-                subtext: ''
-            },
-            tooltip : {
-                trigger: 'item',
-                formatter : function (params) {
-                    var date = new Date(params.value[0]);
-                    data = date.getFullYear() + '-'
-                           + (date.getMonth() + 1) + '-'
-                           + date.getDate() + ' '
-                           + date.getHours() + ':'
-                           + date.getMinutes();
-                    return data + '<br/>'
-                           + params.value[1];
-                }
-            },
-            legend: {
-                show: false,
-                data:['访问量']
-            },
-            toolbox: {
-                show : false,
-                feature : {
-                    mark : {show: true},
-                    dataView : {show: true, readOnly: false},
-                    magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-                    restore : {show: true},
-                    saveAsImage : {show: true}
-                }
-            },
-            calculable : true,
-            grid:{
-                x: 80,
-                y: 10,
-                x2: 50,
-                y2: 40,
-                borderWidth:0
-            },
-            xAxis : [
-                {   
-                    type: 'time',
-                    splitLine: {show: false},
-                    axisLine: {
-                        show: true,
-                        lineStyle: {
-                            color: areaColor.axisColor,
-                            width: 1
-                        }
-                    },
-                    axisLabel: {
-                        show: true,
-                        margin: 4,
-                        textStyle: {
-                            color: areaColor.labelColor,
-                            align: 'center'
-                        }
-                    }
-                }
-            ],
-            yAxis : [
-                {
-                    type : 'value',
-                    splitLine: {show: false},
-                    axisLine: {show: false},
-                    axisLabel: {
-                        textStyle:{
-                            color: areaColor.labelColor
-                        },
-                        formatter: function(value){
-                            if(value != 0){
-                                return value;
-                            }
-                        }
-                    }
-                }
-            ],
-            series : [
-                {
-                    name:'访问量',
-                    type:'line',
-                    smooth:true,
-                    symbol: 'none',
-                    itemStyle: {
-                        normal: {
-                            areaStyle: {
-                                color: areaColor.areaColor,
-                                type: 'default'
-                            },
-                            lineStyle: {
-                               width: 1 
-                            }
-                        }
-                    },
-                    data: (function () {
-                        var d = [];
-                        var len = 0;
-                        var value;
-                        while (len++ < 25) {
-                            d.push([
-                                new Date(2015, 2, 10, 0, (len-1)*60), (Math.random()*2000).toFixed(0) - 0 + 10000]);
-                        }
-                        return d;
-                    })()
-                }
-            ]
-        };
-
-        ezAreaChart.setOption(areaOption);
     };
 
     function drawMap(ec){
@@ -1190,7 +729,7 @@
             legend: {
                 show: true,
                 orient: 'vertical',
-                x:10,
+                x:13,
                 y:20,
                 data:['高','中','低'],
                 textStyle : {

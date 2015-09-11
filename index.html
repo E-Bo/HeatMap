@@ -7,41 +7,49 @@
         <link rel="stylesheet" type="text/css" href="css/ez-icon.css">
     </head>
     <body>
+        <div class="page-top">
+            <span>招行网上银行日访问量统计</span>
+        </div>
         <div id="title">
             <div class="text-container">
-                <span class="sub-text">今日总访问量：</span>
                 <span id="dataCount" class="data-text tick tick-flip">1,321,412,221</span>
+                <span class="sub-text">总量</span>
             </div>
         </div>
         <div id="subTitle">
             <div class="subTitle">
-                <span class="sub-text">手机银行总量：</span>
                 <span id="subDataCount" class="data-text tick tick-flip">32,821,249</span>
-                <div id="timeHolder"></div>
+                <span class="sub-text">手机银行</span>
             </div>
         </div>
         <div id="main">
-            <div id="map"></div>
-        </div>
-        <div class="main-bottom">
-            <div id="pieChartTop" class="chart-container"></div>
-            <div id="pieChartBottom" class="chart-container"></div>
-            <div class="chart-count-container top">
+            <div class="main-top">
+                <div class="main-title js-main-title"><span></span></div>
+                <div class="main-title-right">
+                    <ul class="nav-container nav-horizontal">
+                        <li class="nav-item active" data-control="map" data-tab-name="地区分布"><i class="icon-globe"></i></li>
+                        <li class="nav-item" data-control="charts" data-tab-name="总量Top5"><i class="icon-pie-chart"></i></li>
+                    </ul>
+                </div>
             </div>
-            <div class="chart-count-container bottom">
+            <div class="main-body">
+                <div id="map" class="tab-item active"></div>
+                <div id="charts" class="tab-item main-bottom">
+                    <div id="pieChartTop" class="chart-container"></div>
+                    <div id="pieChartBottom" class="chart-container"></div>
+                </div>
             </div>
         </div>
-        <div id="areaChart"></div>
         <script src="js/echarts/echarts.js"></script>
-        <script src="js/jquery/jquery.js"></script>
+        <script src="js/zepto/zepto.min.js"></script>
+        <script src="js/chart_show-M.js"></script>
+        <!--
         <script src="js/moment/moment.js"></script>
         <script src="js/jquery/jquery.easing.js"></script>
-        <script src="js/countup/countUp.js"></script>
-        <script src="js/numberAnimate/numberAnimate.js"></script>
         <script src="js/tick/tick.js"></script>
         <script src="js/tick/ezTickPlus.js"></script>
         <script src="js/tick/ezCounts.js"></script>
-        <script src="js/chart_show-M.js"></script>
         <script src="js/data_count_ezTick.js"></script>
+        -->
     </body>
 </html>

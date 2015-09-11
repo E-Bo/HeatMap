@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'ezicon';
-	src:url('fonts/ezicon.eot?-3cqr0w');
-	src:url('fonts/ezicon.eot?#iefix-3cqr0w') format('embedded-opentype'),
-		url('fonts/ezicon.ttf?-3cqr0w') format('truetype'),
-		url('fonts/ezicon.woff?-3cqr0w') format('woff'),
-		url('fonts/ezicon.svg?-3cqr0w#ezicon') format('svg');
+	src:url('fonts/ezicon.eot?art8fc');
+	src:url('fonts/ezicon.eot?#iefixart8fc') format('embedded-opentype'),
+		url('fonts/ezicon.ttf?art8fc') format('truetype'),
+		url('fonts/ezicon.woff?art8fc') format('woff'),
+		url('fonts/ezicon.svg?art8fc#ezicon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -23,12 +23,9 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-query-builder:before {
-	content: "\e600";
+.icon-globe:before {
+	content: "\f0ac";
 }
-.icon-clock-o:before {
-	content: "\f017";
-}
-.icon-clock:before {
-	content: "\e94e";
+.icon-pie-chart:before {
+	content: "\f200";
 }

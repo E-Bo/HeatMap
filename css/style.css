@@ -21,6 +21,9 @@ html{
     font-size: 125% !important;
   }
 }
+html,body{
+    height: 100%;
+}
 body {
     margin: 0;
     background-repeat: no-repeat;
@@ -39,6 +42,7 @@ body.blue{
     background-image: radial-gradient(at 50% top at 50% top, rgba(61,69,163,0.6) 0%,rgba(84,90,182,0) 75%),radial-gradient(at right top at right top, #4385ff 0%,rgba(121,74,162,0) 57%), -linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0) 60%, #163063);
 }
 body.purple{
+    color: rgba(255,255,255,0.9);
     background-color: rgba(91,46,191,1);
     background-image: -moz-radial-gradient(50% top, rgba(91,46,191,0.6) 0%,rgba(84,90,182,0) 75%),-moz-radial-gradient(right top, rgba(91,46,191,1) 0%,rgba(121,74,162,0) 57%), -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0) 60%, rgba(0,0,0,0.5));
     background-image: -webkit-radial-gradient(50% top, rgba(91,46,191,0.6) 0%,rgba(84,90,182,0) 75%),-webkit-radial-gradient(right top, rgba(91,46,191,1) 0%,rgba(121,74,162,0) 57%), -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0) 60%, rgba(0,0,0,0.5));
@@ -87,107 +91,56 @@ body.bg-picture{
 }
 
 #title{
-    margin: 0.8rem 0.4rem 0;
+    margin: 1rem 0.4rem 0;
     text-align: center;
     color: #fff;
-    /*height: 2.5rem;*/
     position: relative;
     z-index: 1;
 }
 .sub-text{
-    color: #e4e4e4;
-    line-height: 1.7rem;
-    font-size: 0.8rem;
+    color: #51AAFA;
+    line-height: 1.5rem;
+    font-size: 0.6rem;
+    display: block;
 }
 .data-text{
-    font-size: 1.6rem;
-    line-height: 1.8rem;
-    /*text-shadow: 0 0 5px rgba(255,255,255,0.5);*/
+    font-size: 2.6rem;
+    line-height: 2.8rem;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
     /*font-family:LcdD;*/
 }
-.text-container{
-    display: inline-block;
-    padding: 0 10px;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-}
-.text-container > *{
-    display: inline-block;
-    vertical-align: bottom;
-}
 #subTitle{
-    margin: 0.3rem 0.4rem 0;
+    margin: 0.3rem 0.4rem 0.6rem;
     text-align: center;
     color: #fff;
-    height: 2.5rem;
     position: relative;
     z-index: 1;
 }
 #subTitle .data-text{
-    font-size: 1.2rem;
-    line-height: 1.4rem;
+    font-size: 2.2rem;
+    line-height: 2.4rem;
 }
-#subTitle .sub-text{
-    line-height: 0.8rem;
-    display: none;
-}
-.subTitle > *{
-    display: inline-block;
-    vertical-align:top;
-    /*text-shadow: 0 0 3px rgba(0,0,0,0.7);*/
-}
-.subTitle{
-    display: inline-block;
-    position: relative;
+.subTitle > .sub-text{
+    color: #60F49E;
 }
 #main{
     width: 100%;
-    position: relative;
-    height: 50%;
+    position: absolute;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    top: 12.7rem;
+    bottom: 0;
+    overflow: hidden;
 }
 #map {
     width: 100%;
     height: 100%;
 }
 .main-bottom{
-    position: relative;
     min-height: 340px;
-    height: 60%;
 }
 .chart-container{
     height: 50%;
     width: 100%;
-}
-.chart-count-container{
-    position: absolute;
-    min-width: 4.5rem;
-    right: 100%;
-    margin-right: -4.2rem;
-    height: 50%;
-    padding: 20px 0 30px;
-    -moz-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    text-align: right;
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flex;
-    display: flex;
-    align-items: flex-end;
-    flex-flow: column;
-    justify-content: space-around;
-}
-.chart-count-container.top{
-    top: 0;
-}
-.chart-count-container.bottom{
-    top: 50%;
-}
-.chart-count-item{
-    color: #fff;
-    font-size: 0.8em;
-    height: 1em;
-    line-height: 1em;
 }
 #areaChart{
     height: 9rem;
@@ -196,27 +149,73 @@ body.bg-picture{
     bottom: 0;
     visibility: hidden;
 }
-
-#timeHolder{
-    position: absolute;
-    width: 5.4rem;
-    height: 1.8rem;
-    line-height: 1.8rem;
-    border-radius: 3px;
-    bottom: -110%;
-    left: 50%;
-    margin-left: -2.7rem;
-    font-size: 1.3rem;
-    color: #fff;
-    font-family:LcdD;
-    /*background-color: rgba(0,0,0,0.2);*/
-    /*box-shadow: inset 0 0 4px rgba(0,0,0,0.3);*/
-    text-align: left;
+.page-top{
+    padding: 0.8em;
+    font-size: 0.95em;
+    text-align: center;
+    color:rgba(255,255,255,0.9);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
 }
-#timeHolder:before{
-    font-family: 'ezicon';
-    content: "\e600";
-    font-size: 1rem;
-    margin-right: 0.2rem;
-    font-weight: normal;
+.main-top{
+    height: 1.5rem;
+    padding: 0 15px;
+    position: relative;
+    z-index: 2;
+}
+.main-body{
+    position: absolute;
+    width: 100%;
+    top: 1.5rem;
+    bottom: 0;
+    z-index: 1;
+}
+.main-title{
+    height: 1.5rem;
+    font-size: 0.8rem;
+    width: 40%;
+    float: left;
+}
+.main-title > span{
+    display: inline-block;
+    line-height: 0.8rem;
+    margin-top: 0.7rem;
+}
+.main-title-right{
+    float: right;
+    font-size: 1.2rem;
+    padding-top: 0.1em;
+}
+
+
+.nav-container{
+    margin: 0;
+    padding: 0;
+}
+.nav-item{
+    list-style: none;
+    padding: 0.3em;
+    text-align: center;
+    width: 1.2rem;
+}
+.nav-item-inner{
+
+}
+.nav-horizontal > .nav-item{
+    display: inline-block;
+}
+.nav-item.active{
+    color: #FAF651;
+    border-bottom: 2px solid currentcolor;
+}
+.tab-item{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    z-index: 0;
+    visibility: hidden;
+}
+.tab-item.active{
+    z-index: 1;
+    visibility: visible;
 }
