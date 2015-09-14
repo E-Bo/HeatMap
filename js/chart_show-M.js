@@ -254,7 +254,10 @@
             },
             legend: {
                 show: false,
-                data:['浙江','广东','北京','上海','湖北']
+                data:['浙江','广东','北京','上海','湖北'],
+                textStyle: {
+                    color: "auto"
+                }
             },
             toolbox: {
                 show : false,
@@ -728,8 +731,8 @@
             },
             legend: {
                 show: true,
-                orient: 'vertical',
-                x:13,
+                orient: 'horizontal',
+                x:15,
                 y:20,
                 data:['高','中','低'],
                 textStyle : {
