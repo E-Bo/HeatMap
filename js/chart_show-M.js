@@ -224,8 +224,9 @@
     };
 
     var seletedTheme = "purple";
-
-    $('body').addClass(seletedTheme);
+    if(!$('body').hasClass(seletedTheme)){
+        $('body').removeAttr('class').addClass(seletedTheme);
+    }
     var barColor = Themes[seletedTheme].barColor;
     var pointColor = Themes[seletedTheme].pointColor;
     var mapBorderColor = Themes[seletedTheme].mapBorderColor;
