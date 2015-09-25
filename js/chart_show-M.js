@@ -734,9 +734,12 @@
                 orient: 'horizontal',
                 x:15,
                 y:20,
+                itemWidth: 12,
+                itemHeight: 12,
                 data:['高','中','低'],
                 textStyle : {
-                    color: '#fff'
+                    color: '#fff',
+                    fontSize: 12
                 }
             },
             toolbox: {
