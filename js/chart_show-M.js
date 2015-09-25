@@ -808,7 +808,7 @@
                         // },
                         data : (function(){
                             var data = [];
-                            var len = 600;
+                            var len = 300;
                             var geoCoord;
                             while(len--) {
                                 geoCoord = placeListAll[len % placeListAll.length].geoCoord;
@@ -852,7 +852,7 @@
                         // },
                         data : (function(){
                             var data = [];
-                            var len = 300;
+                            var len = 150;
                             var geoCoord
                             while(len--) {
                                 geoCoord = placeListAll[len % placeListAll.length].geoCoord;
