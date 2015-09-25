@@ -753,7 +753,7 @@
             },
             series : [
                 {
-                    name: 'top5',
+                    name: '低',
                     type: 'map',
                     roam: false,
                     hoverable: false,
@@ -787,108 +787,6 @@
                             }
                         }
                     },
-                    data : [],
-                    markPoint : {
-                        symbol:'emptyCircle',
-                        symbolSize : function(v){
-                            return 20 + v/5;
-                        },
-                        itemStyle:{
-                            normal:{
-                                borderWidth: 0,
-                                label: {
-                                    show: false
-                                }
-                            },
-                            emphasis:{
-                                borderWidth: 0,
-                                label: {
-                                    show: false
-                                }
-                            }
-                        },
-                        effect : {
-                            color: circleColor.t5Color,
-                            show: true,
-                            shadowBlur : 5,
-                            period: 16,
-                            scaleSize: 1
-                        },
-                        data: []
-                    }
-                },
-                {
-                    name: 'top10',
-                    type: 'map',
-                    mapType: 'china',
-                    data : [],
-                    markPoint : {
-                        symbol:'emptyCircle',
-                        symbolSize : function(v){
-                            return 16 + v/5;
-                        },
-                        itemStyle:{
-                            normal:{
-                                borderWidth: 0,
-                                label: {
-                                    show: false
-                                }
-                            },
-                            emphasis:{
-                                borderWidth: 0,
-                                label: {
-                                    show: false
-                                }
-                            }
-                        },
-                        effect : {
-                            color: circleColor.t10Color,
-                            show: true,
-                            shadowBlur : 5,
-                            period: 16,
-                            scaleSize: 1
-                        },
-                        data: []
-                    }
-                },
-                {
-                    name: 'top20',
-                    type: 'map',
-                    mapType: 'china',
-                    data : [],
-                    markPoint : {
-                        symbol:'emptyCircle',
-                        symbolSize : function(v){
-                            return 12 + v/5;
-                        },
-                        itemStyle:{
-                            normal:{
-                                borderWidth: 0,
-                                label: {
-                                    show: false
-                                }
-                            },
-                            emphasis:{
-                                borderWidth: 0,
-                                label: {
-                                    show: false
-                                }
-                            }
-                        },
-                        effect : {
-                            color: circleColor.t20Color,
-                            show: true,
-                            shadowBlur : 5,
-                            period: 16,
-                            scaleSize: 1
-                        },
-                        data: []
-                    }
-                },
-                {
-                    name: '低',
-                    type: 'map',
-                    mapType: 'china',
                     data : [],
                     markPoint : {
                         symbol : 'diamond',
